@@ -4,6 +4,7 @@ using CRUDUsuarios.Comunication.Responses;
 using CRUDUsuarios.Domain.Entities;
 using CRUDUsuarios.Exception.Exceptions;
 using CRUDUsuarios.Infrastructure.DataAccess;
+using CRUDUsuarios.Infrastructure.Security.Cryptography;
 
 namespace CRUDUsuarios.Aplication.usecases.User.Register
 {
@@ -16,11 +17,13 @@ namespace CRUDUsuarios.Aplication.usecases.User.Register
          
             Validator(user);
 
+            var encriptedPassword = BCryptAlgorithm.HashPassword(user.Password);
+
             var entity = new UserDto
             {
                 name = user.Name,
                 email = user.Email,
-                password = user.Password
+                password = encriptedPassword
             };
 
             db_context.users.Add(entity);
