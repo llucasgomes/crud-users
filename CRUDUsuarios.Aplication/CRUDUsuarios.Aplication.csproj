@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="12.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CRUDUsuarios.Comunication\CRUDUsuarios.Comunication.csproj" />
     <ProjectReference Include="..\CRUDUsuarios.Domain\CRUDUsuarios.Domain.csproj" />
     <ProjectReference Include="..\CRUDUsuarios.Exception\CRUDUsuarios.Exception.csproj" />

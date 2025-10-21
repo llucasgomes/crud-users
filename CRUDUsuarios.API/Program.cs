@@ -1,3 +1,4 @@
+using CRUDUsuarios.Exception.Filters;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,9 @@ builder.Services.AddControllers();
 
 // configura para que as urls sejam minusculas
 builder.Services.AddRouting(option => option.LowercaseUrls = true);
+
+
+builder.Services.AddMvc(options => options.Filters.Add<ExceptionFilter>());
 
 builder.Services.AddOpenApi();
 

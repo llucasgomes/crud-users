@@ -1,7 +1,7 @@
 ﻿using CRUDUsuarios.Aplication.usecases.User.Register;
 using CRUDUsuarios.Comunication.Requests;
 using CRUDUsuarios.Comunication.Responses;
-using Microsoft.AspNetCore.Http.HttpResults;
+using CRUDUsuarios.Exception.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CRUDUsuarios.API.Controllers
@@ -13,12 +13,15 @@ namespace CRUDUsuarios.API.Controllers
 
         [HttpPost]
         [ProducesResponseType(typeof(ResponseShortUserJson),StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseErrorMessageJson),StatusCodes.Status400BadRequest)]
         public IActionResult CreateUser([FromBody] RequestRegisterUserJson user)
         {
+
             var usecase = new RegisterUserUseCase();
             var response = usecase.Execute(user);
 
-            return Created(string.Empty,new { Message = "Usuario registrado com sucesso", User = response });
+            return Created(string.Empty, new { Message = "Usuario registrado com sucesso", User = response });
+
         }
     }
 }
