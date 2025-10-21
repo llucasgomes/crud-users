@@ -1,8 +1,8 @@
 ﻿using CRUDUsuarios.Aplication.usecases.User.GetAllUsers;
+using CRUDUsuarios.Aplication.usecases.User.GetUserById;
 using CRUDUsuarios.Aplication.usecases.User.Register;
 using CRUDUsuarios.Comunication.Requests;
 using CRUDUsuarios.Comunication.Responses;
-using CRUDUsuarios.Exception.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CRUDUsuarios.API.Controllers
@@ -41,6 +41,22 @@ namespace CRUDUsuarios.API.Controllers
             {
                 return NoContent();
             }
+
+            return Ok(response);
+        }
+
+
+        [HttpPut]
+        [Route("{id}")]
+        [ProducesResponseType(typeof(ResponseShortUserJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorMessageJson), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult UpdateUseById([FromRoute] Guid id,[FromBody] RequestRegisterUserJson updateData)
+        {
+            var usecase = new UpdateUserUseCase();
+            var response = usecase.Execute(id, updateData);
+
+           
 
             return Ok(response);
         }

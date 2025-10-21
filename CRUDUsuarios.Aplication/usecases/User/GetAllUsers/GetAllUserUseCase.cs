@@ -18,11 +18,6 @@ namespace CRUDUsuarios.Aplication.usecases.User.GetAllUsers
                 Email = u.email
             }).ToList();
 
-
-
-
-
-
             return users;
 
 
