@@ -14,6 +14,7 @@ namespace CRUDUsuarios.API.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(ResponseShortUserJson),StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorMessageJson),StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult CreateUser([FromBody] RequestRegisterUserJson user)
         {
 
