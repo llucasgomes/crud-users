@@ -1,7 +1,9 @@
 ﻿using CRUDUsuarios.Aplication.usecases.User.Validations;
 using CRUDUsuarios.Comunication.Requests;
 using CRUDUsuarios.Comunication.Responses;
+using CRUDUsuarios.Domain.Entities;
 using CRUDUsuarios.Exception.Exceptions;
+using CRUDUsuarios.Infrastructure.DataAccess;
 
 namespace CRUDUsuarios.Aplication.usecases.User.Register
 {
@@ -9,7 +11,21 @@ namespace CRUDUsuarios.Aplication.usecases.User.Register
     {
         public  ResponseShortUserJson Execute(RequestRegisterUserJson user)
         {
+            var db_context = new CRUDUsuariosDBContext();
+
+         
             Validator(user);
+
+            var entity = new UserDto
+            {
+                name = user.Name,
+                email = user.Email,
+                password = user.Password
+            };
+
+            db_context.users.Add(entity);
+            db_context.SaveChanges();
+
 
 
             return new ResponseShortUserJson

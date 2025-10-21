@@ -19,6 +19,7 @@ namespace CRUDUsuarios.API.Controllers
         {
 
             var usecase = new RegisterUserUseCase();
+      
             var response = usecase.Execute(user);
 
             return Created(string.Empty, new { Message = "Usuario registrado com sucesso", User = response });
