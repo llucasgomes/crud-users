@@ -1,4 +1,5 @@
-﻿using CRUDUsuarios.Aplication.usecases.User.GetAllUsers;
+﻿using CRUDUsuarios.Aplication.usecases.User.Delete;
+using CRUDUsuarios.Aplication.usecases.User.GetAllUsers;
 using CRUDUsuarios.Aplication.usecases.User.GetUserById;
 using CRUDUsuarios.Aplication.usecases.User.Register;
 using CRUDUsuarios.Comunication.Requests;
@@ -59,6 +60,19 @@ namespace CRUDUsuarios.API.Controllers
            
 
             return Ok(response);
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorMessageJson), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult DeleteUserById([FromRoute] Guid id)
+        {
+            var usecase = new DeleteUserByIdUseCase();
+            usecase.Execute(id);
+
+            return NoContent();
         }
     }
 }
