@@ -2,7 +2,7 @@
 {
     public class UserDto
     {
-        public Guid id { get; set; } = new Guid();
+        public string id { get; set; } = new Guid().ToString();
         public string name { get; set; } = string.Empty;
         public string email { get; set; } = string.Empty;
 
